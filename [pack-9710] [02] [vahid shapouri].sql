@@ -24,5 +24,14 @@ INNER JOIN Production.Location PL ON  PL.LocationID=PP.LocationID
 ---FROM Production.ProductInventory
 ---)
 GROUP BY P.Name  , PP.Quantity
--------------4
+-------------3
+SELECT pp.Name, pv.Quantity
+FROM Production.ProductSubcategory pp
+
+INNER JOIN Production.Product P ON PP.ProductSubcategoryID=p.ProductSubcategoryID
+INNER JOIN Production.ProductInventory PV ON PV.ProductID=p.ProductID
+INNER JOIN Production.Location PL On PL.LocationID=PV.LocationID
+
+WHERE (Quantity- SafetyStockLevel) > 100
+GROUP BY pp.Name, pv.Quantity
 
